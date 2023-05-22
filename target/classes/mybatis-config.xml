@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-<!--        <typeAlias type="com.icia.membership_board.dto.MemberDTO" alias="Member"></typeAlias>-->
-
+        <typeAlias type="com.icia.OsakaBoard.dto.MemberDTO" alias="Member"></typeAlias>
+        <typeAlias type="com.icia.OsakaBoard.dto.MemberFileDTO" alias="MemberFile"></typeAlias>
     </typeAliases>
 </configuration>
