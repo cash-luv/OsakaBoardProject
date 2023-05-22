@@ -8,10 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="membership_board" />
+        <module name="OsakaBoard" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="OsakaBoard" target="1.5" />
-    </bytecodeTargetLevel>
   </component>
 </project>

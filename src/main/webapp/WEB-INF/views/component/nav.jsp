@@ -19,14 +19,14 @@
 </nav>
 
 <script>
-    const loginArea = document.getElementById("login-area");
-    const loginEmail = '${sessionScope.loginEmail}';
-    console.log(loginEmail.length);
+    <%--const loginArea = document.getElementById("login-area");--%>
+    <%--const loginEmail = '${sessionScope.loginEmail}';--%>
+    <%--console.log(loginEmail.length);--%>
 
-    if (loginEmail.length != 0) {
-        loginArea.innerHTML = "<a href='/mypage' style='color: black;'>"+loginEmail +"님 환영해요!</a>"+
-                                "<a href='/logout'>logout</a>";
-    } else {
-        loginArea.innerHTML = "<a href='/login'>login</a>";
-    }
+    <%--if (loginEmail.length != 0) {--%>
+    <%--    loginArea.innerHTML = "<a href='/mypage' style='color: black;'>"+loginEmail +"님 환영해요!</a>"+--%>
+    <%--                            "<a href='/logout'>logout</a>";--%>
+    <%--} else {--%>
+    <%--    loginArea.innerHTML = "<a href='/member/login'>login</a>";--%>
+    <%--}--%>
 </script>

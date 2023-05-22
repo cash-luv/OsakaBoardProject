@@ -15,13 +15,18 @@
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/resources/css/save.css">
+    <link rel="stylesheet" href="/resources/css/rpg.css">
+
+    /
 </head>
 <body class="pt-5">
 <%@include file="./component/nav.jsp" %>
 <div class="container">
     <div class="row">
         <%@include file="./component/category.jsp" %>
-        <div class="col-lg-9 my-4 mb-4">
+
+
+            <div class="col-lg-9 my-4 mb-4">
             <%--                여기서부터 본문내용 입력--%>
                 <section class="bg-black">
                     <div class="container py-4">
