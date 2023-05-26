@@ -17,12 +17,13 @@
 </head>
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/save.css">
+<link rel="stylesheet" href="/resources/css/rpg.css">
 <body class="pt-5">
 <%@include file="../component/nav.jsp" %>
 <div class="container">
     <div class="row">
         <%@include file="../component/category.jsp" %>
-        <div class="col-lg-9 my-4 mb-4">
+        <div class="col-lg-9 my-4 mb-8">
             <%-- 여기서부터 본문내용 입력 --%>
             <div class="container">
                 <div class="row align-items-center justify-content-between">
@@ -32,18 +33,18 @@
                 </div>
                 <div class="row justify-content-center align-items-center">
                     <div class="col-lg-4">
-                        <form action="/save" method="post" class="text-center">
+                        <form action="/member/login" method="post" class="text-center">
                             <!-- ID 입력 -->
                             <div class="form-group">
                                 <label for="userID" class="sr-only">ID</label>
-                                <input type="text" name="userID" class="form-control"
-                                       placeholder="Input ID" id="userID" required>
+                                <input type="text" name="memberId" class="form-control"
+                                       placeholder="ID" id="userID" required>
                             </div>
                             <!-- PW 입력 -->
                             <div class="form-group">
                                 <label for="userPW" class="sr-only">Password</label>
-                                <input type="password" name="userPW" class="form-control"
-                                       placeholder="Input Password" id="userPW" required>
+                                <input type="text" name="memberPassword" class="form-control"
+                                       placeholder="Password" id="userPW" required>
                             </div>
                             <!-- 자동 로그인 -->
                             <div class="custom-control custom-checkbox mb-3">
@@ -62,23 +63,7 @@
                                 onclick="location.href='/register'">회원가입 하기
                         </button>
 
-                        <%-- <%--%>
-                        <%-- }--%>
-                        <%-- %>--%>
 
-                        <!-- 회원가입 성공, 로그인 실패 등 메세지가 있으면 경고창 출력 -->
-                        <%
-                            Object obj = session.getAttribute("loginMsg");
-                            if (obj != null) {
-                                String msg = (String) obj;
-                        %>
-                        <div class="alert alert-danger text-center mt-3" role="alert"><%=msg%>
-                        </div>
-                        <%
-                                // 출력한 메세지는 지워줌
-                                session.removeAttribute("loginMsg");
-                            }
-                        %>
                     </div>
                 </div>
             </div>

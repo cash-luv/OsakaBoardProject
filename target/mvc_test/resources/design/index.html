@@ -9,63 +9,157 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script
             src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 </head>
 
-<!-- 네비바를 fiexd-top으로 설정했을 때 컨텐츠와 겹치는 문제 방지 -->
 <body class="pt-5">
-
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="/etc">오사카한인커뮤니티</a>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a class="nav-link" href="/etc">홈
-                    <span class="sr-only">(current)</span>
-                </a></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/join/login.jsp">로그인</a></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/join/register.jsp">회원가입</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<!-- Page Content -->
 <div class="container">
     <div class="row">
+        <div class="col-lg-9 my-5 mb-5">
+            <%-- 여기서부터 본문내용 입력--%>
+            <section class="bg-white">
+                <div class="container py-4">
+                    <div class="row align-items-center justify-content-between">
+                        <a class="navbar-brand h1 text-center" href="/member/save">
+                            <span class="text-dark h2">회원가입</span>
+                        </a>
+                    </div>
+                    <form action="/member/save" method="post" onsubmit="return ValidationName()"
+                          enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="Profile" class="form-label mt-4"><b>프로필사진</b></label>
+                            <input type="file" name="Profile" id="Profile" multiple>
+                        </div>
+                        <div class="form-group">
+                            <label for="memberId" class="form-label mt-4">아이디</label>
+                            <input type="text" class="form-control" id="memberId" name="memberId"
+                                   aria-describedby="emailHelp" onblur="id_check()">
+                            <p id="check-result"></p>
+                        </div>
 
-        <div class="col-lg-3">
+                        <div class="form-group" id="passwordFormGroup">
+                            <label class="form-label mt-4" for="memberPassword">비밀번호</label>
+                            <input type="text" class="form-control " id="memberPassword" name="memberPassword"
+                                   onblur="checkPassword()">
+                            <p id="valid-feedback"></p>
+                        </div>
 
-            <h3 class="my-4 text-center">Category</h3>
-            <div class="list-group mb-4">
-                <a class="list-group-item list-group-item-info text-center font-weight-bold">인기글</a>
-                <a href="#"
-                   class="list-group-item list-group-item-action text-center font-weight-bold">
-                    자유게시판</a>
-                <a href="#" class="list-group-item list-group-item-action text-center font-weight-bold">
-                    정보게시판</a>
-            </div>
+                        <div class="form-group" id="passwordCheckFormGroup">
+                            <label class="form-label mt-4" for="PasswordCheck">비밀번호 재확인</label>
+                            <input type="text" class="form-control " id="PasswordCheck" onblur="checkPassword()">
+                            <p id="invalid-feedback"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="memberName" class="form-label mt-4">이름</label>
+                            <input type="text" class="form-control" id="memberName" name="memberName"
+                                   aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="bir_wrap">
+                            <label class="form-label mt-4">생년월일</label>
+                            <div class="bir_yy">
+                                    <span class="ps_box">
+                                        <input type="text" name="birthYY" class="form-control" id="memberBirth"
+                                               placeholder="년(4자)" maxlength="4">
+                                    </span>
+                            </div>
+                            <div class="bir_mm">
+                                    <span class="ps_box focus">
+                                        <select class="form-select" id="mm" name="birthMM">
+                                            <option value="">월</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                    </span>
+                            </div>
+                            <div class="bir_dd">
+                                    <span class="ps_box">
+                                        <input type="text" class="form-control" id="dd" name="birthDD" placeholder="일"
+                                               maxlength="2">
+                                    </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="memberGender" class="form-label mt-4">성별</label>
+                            <select class="form-select" id="memberGender" name="memberGender">
+                                <option value="">선택</option>
+                                <option value="남자">남자</option>
+                                <option value="여자">여자</option>
+                                <option value="시크릿">비밀</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="sample4_postcode" class="form-label mt-4">주소</label>
+                            <div class="row mt-2">
+                                <div class="col">
+                                    <input type="text" class="form-control" id="sample4_postcode" name="memberAddress"
+                                           placeholder="우편번호">
+                                </div>
+                                <div class="col-auto">
+                                    <input type="button" class="btn btn-secondary" onclick="searchAddress()"
+                                           value="우편번호 찾기">
+                                </div>
+                            </div>
+                            <input type="text" class="form-control mt-2" id="sample4_roadAddress" name="memberAddress1"
+                                   placeholder="도로명주소">
+                            <input type="text" class="form-control mt-2" id="sample4_jibunAddress" name="memberAddress2"
+                                   placeholder="지번주소">
+                            <span id="guide" style="color:#999; display:none"></span>
+                            <input type="text" class="form-control mt-2" id="sample4_detailAddress"
+                                   name="memberAddress3" placeholder="상세주소">
+                            <input type="text" class="form-control mt-2" id="sample4_extraAddress" placeholder="참고항목">
+                        </div>
+                        <div class="form-group">
+                            <label for="memberEmail1" class="form-label mt-4">이메일 본인확인</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="memberEmail1" name="memberEmail"
+                                       aria-describedby="emailHelp" placeholder="Email">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="emailAddon">@</span>
+                                </div>
+                                <input type="text" class="form-control" id="emailDomain" name="memberDomain"
+                                       placeholder="직접입력">
+                                <select class="form-select" id="domainOptions" onchange="selectDomain()">
+                                    <option value="">직접입력</option>
+                                    <option value="naver.com">naver.com</option>
+                                    <option value="daum.net">daum.net</option>
+                                    <option value="gmail.com">gmail.com</option>
+                                    <option value="hanmail.com">hanmail.com</option>
+                                    <option value="yahoo.co.kr">yahoo.co.kr</option>
+                                    <option value="example.com">example.com</option>
+                                    <option value="domain.com">domain.com</option>
+                                    <option value="test.com">test.com</option>
+                                </select>
+                            </div>
+                            <div class="mail-check-box">
+                                <input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!"
+                                       disabled="disabled" maxlength="6">
+                            </div>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-primary" id="mail-Check-Btn">본인인증</button>
+                            </div>
+                            <span id="mail-check-warn"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <input class="btn btn-dark btn-lg" type="submit" id="submitBtn" value="가입하기">
+                        </div>
+                    </form>
+                </div>
+            </section>
         </div>
-        <div class="col-lg-9 my-4 mb-4">
-
-            <%@page import="login.SessionCheck"%>
-            <%@ page language="java" contentType="text/html; charset=UTF-8"
-            pageEncoding="UTF-8"%>
-
-        </div>
-        <!-- /.col-lg-9 -->
     </div>
-    <!-- /.row -->
 </div>
-<!-- Footer -->
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Codevang
-            2020</p>
-    </div>
-    <!-- /.container -->
-</footer>
 </body>
 </html>

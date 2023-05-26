@@ -10,18 +10,20 @@
 <head>
     <title>Title</title>
 </head>
+
 <body>
-<div class="col-lg-3">
-  <h3 class="my-4 text-center">Category</h3>
-  <div class="list-group mb-4">
-    <a class="list-group-item list-group-item-info text-center font-weight-bold">인기글</a>
-    <a href="#"
+
+<div class="col-lg-2">
+  <h3 class="my-4 text-center">카테고리</h3>
+  <div class="list-group mt-4 my-3 mb-3">
+    <a class="list-group-item list-group-item-action text-center font-weight-bold">인기글</a>
+    <a href="/board/list"
+       class="list-group-item list-group-item-action text-center font-weight-bold">전체글보기</a>
+    <a href="/board/list?boardCategory=1"
        class="list-group-item list-group-item-action text-center font-weight-bold">자유게시판</a>
-    <a href="#"
+    <a href="/board/list?boardCategory=2"
        class="list-group-item list-group-item-action text-center font-weight-bold">정보게시판</a>
-    <a href="#"
-       class="list-group-item list-group-item-action text-center font-weight-bold">정보게시판</a>
-    <a href="#"
+    <a href="/board/list"
        class="list-group-item list-group-item-action text-center font-weight-bold">정보게시판</a>
     <a href="#"
        class="list-group-item list-group-item-action text-center font-weight-bold">정보게시판</a>
@@ -33,5 +35,7 @@
   </div>
 
 </div>
+
+
 </body>
 </html>

@@ -14,103 +14,53 @@
     <title>OsakaBoard</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/resources/css/save.css">
-    <link rel="stylesheet" href="/resources/css/rpg.css">
-
-    /
 </head>
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/css/save.css">
 <body class="pt-5">
 <%@include file="./component/nav.jsp" %>
 <div class="container">
     <div class="row">
+
         <%@include file="./component/category.jsp" %>
-
-
-            <div class="col-lg-9 my-4 mb-4">
-            <%--                여기서부터 본문내용 입력--%>
-                <section class="bg-black">
-                    <div class="container py-4">
-                        <div class="row align-items-center justify-content-between">
-                            <a class="navbar-brand h1 text-center" href="member/save">
-                                <span class="text-dark h2">회원가입</span>
-                            </a>
+        <div class="col-lg-9 mx-3 my-4 mb-4">
+            <%-- 여기서부터 본문내용 입력 --%>
+                <div class="jumbotron">
+                    <h1>Welcome to OsakaBoard!</h1>
+                    <p>This is a community site for the Osaka Korean community.</p>
+                    <p>Feel free to explore and participate in discussions.</p>
+                    <a href="/board/paging" class="btn btn-primary">View Board</a>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Upcoming Events</h5>
+                                <p class="card-text">Check out the latest events happening in Osaka.</p>
+                                <a href="#" class="btn btn-primary">Learn More</a>
+                            </div>
                         </div>
-                        <form>
-                            <div class="form-group">
-                                <label for="memberEmail" class="form-label mt-4">아이디</label>
-                                <input type="text" class="form-control" id="memberEmail"  aria-describedby="emailHelp">
-                            </div>
-
-                            <div class="form-group has-success">
-                                <label class="form-label mt-4" for="memberPassword">비밀번호</label>
-                                <input type="password" class="form-control is-valid" id="memberPassword">
-                                <div class="valid-feedback"></div>
-                            </div>
-
-                            <div class="form-group has-danger">
-                                <label class="form-label mt-4" for="memberPasswordCheck">비밀번호 재확인</label>
-                                <input type="password" class="form-control is-invalid" id="memberPasswordCheck">
-                                <div class="invalid-feedback">비밀번호가 일치하지 않습니다</div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="memberName" class="form-label mt-4">이름</label>
-                                <input type="text" class="form-control" id="memberName" aria-describedby="emailHelp">
-                            </div>
-
-                            <div class="bir_wrap">
-                                <label class="form-label mt-4">생년월일</label>
-                                <div class="bir_yy">
-                                    <span class="ps_box">
-                                        <input type="text" class="form-control" id="yy" placeholder="년(4자)" maxlength="4">
-                                    </span>
-                                </div>
-                                <div class="bir_mm">
-                                    <span class="ps_box focus">
-                                        <select class="form-select" id="mm" id="memberBirth">
-                                            <option>월</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                            <option>6</option>
-                                            <option>7</option>
-                                            <option>8</option>
-                                            <option>9</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option>12</option>
-                                        </select>
-                                    </span>
-                                </div>
-                                <div class="bir_dd">
-                                    <span class="ps_box">
-                                        <input type="text" class="form-control" id="dd" placeholder="일" maxlength="2">
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="memberGender" class="form-label mt-4">성별</label>
-                                <select class="form-select" id="memberGender">
-                                    <option>남자</option>
-                                    <option>여자</option>
-                                    <option>비밀</option>
-                                </select>
-                            </div>
-                            <div class="from-group">
-                                <label for="memberEmail1" class="form-label mt-4">본인 확인 이메일</label>
-                                <input type="email" class="form-control" id="memberEmail1" aria-describedby="emailHelp" placeholder="선택입력">
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-primary btn-lg" type="button">가입하기</button>
-                            </div>
-                        </form>
                     </div>
-                </section>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Community Guidelines</h5>
+                                <p class="card-text">Learn about our community guidelines and policies.</p>
+                                <a href="#" class="btn btn-primary">Read Guidelines</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
+
     </div>
 </div>
+        </div>
+        </section>
+    </div>
+</div>
+
+
 <%@include file="./component/footer.jsp" %>
 
 
