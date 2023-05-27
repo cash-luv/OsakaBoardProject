@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Board">
+    <select id="pagingList" parameterType="java.util.HashMap" resultType="board">
+        select * from Board_table order by id desc limit #{start}, #{limit}
+    </select>
+
+    <select id="count" resultType="Integer">
+        select count(id) from Board_table
+    </select>
+
+    <select id="searchList" parameterType="java.util.HashMap" resultType="board">
+        select * from Board_table
+        where boardTitle like concat('%', #{q}, '%') or
+            boardWriter like concat('%', #{q}, '%') or
+            boardHits like concat('%', #{q}, '%')
+        order by id desc limit #{start}, #{limit}
+    </select>
+
+    <select id="searchCount" parameterType="String" resultType="Integer">
+        select count(id) from Board_table
+        where boardTitle like concat('%', #{q}, '%') or
+            boardWriter like concat('%', #{q}, '%') or
+            boardHits like concat('%', #{q}, '%')
+    </select>
+
+    <select id="categoryList" parameterType="java.util.HashMap" resultType="board">
+        select * from Board_table where boardCategory = #{boardCategory}
+        order by id desc limit #{start}, #{limit}
+    </select>
+
+    <select id="categoryCount" parameterType="Integer" resultType="Integer">
+        select count(id) from Board_table where boardCategory = #{boardCategory}
+    </select>
+
+    <select id="categorySearchList" parameterType="java.util.HashMap" resultType="board">
+        select * from Board_table
+        where boardCategory = #{boardCategory} and
+            (boardTitle like concat('%', #{q}, '%') or
+             boardWriter like concat('%', #{q}, '%') or
+             boardHits like concat('%', #{q}, '%'))
+        order by id desc limit #{start}, #{limit}
+    </select>
+
+    <select id="categorySearchCount" parameterType="java.util.HashMap" resultType="Integer">
+        select count(id) from Board_table
+        where boardCategory = #{boardCategory} and
+            (boardTitle like concat('%', #{q}, '%') or
+             boardWriter like concat('%', #{q}, '%') or
+             boardHits like concat('%', #{q}, '%'))
+    </select>
+
+    <insert id="save" parameterType="Board" useGeneratedKeys="true" keyProperty="id">
+        insert into Board_table(boardTitle, boardWriter, boardContents, fileAttached,boardCategory ,member_id)
+        values (#{boardTitle}, #{boardWriter}, #{boardContents}, #{fileAttached},#{boardCategory},#{member_id})
+    </insert>
+
+    <insert id="saveFile" parameterType="boardFile">
+        insert into Board_file_table(originalFileName, storedFileName, boardId)
+        values (#{originalFileName}, #{storedFileName}, #{boardId})
+    </insert>
+
+    <select id="findById" parameterType="Long" resultType="Board">
+        select * from Board_table where id=#{id}
+    </select>
+
+    <select id="findFile" parameterType="Long" resultType="boardFile">
+        select * from Board_file_table where boardId=#{boardId}
+    </select>
+
+    <update id="updateHits" parameterType="Long">
+        update Board_table set boardHits=boardHits+1 where id=#{id}
+    </update>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

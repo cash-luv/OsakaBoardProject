@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Member">
+
+    <insert id="Save" parameterType="Member" useGeneratedKeys="true" keyProperty="member_id">
+        insert into Members_table(memberId,memberPassword,memberName,memberBirth,memberGender,memberAddress,memberEmail,fileAttached)
+        values (#{memberId},#{memberPassword},#{memberName},#{memberBirth},#{memberGender},#{memberAddress},#{memberEmail},#{fileAttached})
+    </insert>
+
+    <insert id="saveFile" parameterType="MemberFile">
+        insert into member_file_table(originalFileName,storedFileName,member_Id)
+        values (#{originalFileName},#{storedFileName},#{member_Id})
+    </insert>
+
+    <select id="findByMemberId" parameterType="String" resultType="Member">
+        select * from  Members_table where memberId = #{memberId}
+    </select>
+
+    <select id="login" parameterType="Member" resultType="Member">
+        select * from Members_table where memberId=#{memberId} and memberPassword=#{memberPassword}
+    </select>
+
+    <select id="findAll" resultType="Member">
+        select  * from Members_table
+    </select>
+
+    <update id="update" parameterType="Member">
+        update Members_table set memberId=#{memberId},memberPassword=#{memberPassword}, memberName=#{memberName}, memberBirth=#{memberBirth}
+                               , memberGender=#{memberGender}, memberAddress=#{memberAddress}, memberEmail=#{memberEmail}
+                             where member_id=#{member_id}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        delete from Members_table where memberId = #{memberId}
+    </delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
