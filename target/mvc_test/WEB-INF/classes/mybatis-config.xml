@@ -5,5 +5,8 @@
     <typeAliases>
         <typeAlias type="com.icia.OsakaBoard.dto.MemberDTO" alias="Member"></typeAlias>
         <typeAlias type="com.icia.OsakaBoard.dto.MemberFileDTO" alias="MemberFile"></typeAlias>
+        <typeAlias type="com.icia.OsakaBoard.dto.BoardDTO" alias="Board"></typeAlias>
+        <typeAlias type="com.icia.OsakaBoard.dto.BoardFileDTO" alias="boardFile"></typeAlias>
+        <typeAlias type="com.icia.OsakaBoard.dto.CommentDTO" alias="Comment"></typeAlias>
     </typeAliases>
 </configuration>

@@ -22,10 +22,10 @@
     <a href="/board/list?boardCategory=1"
        class="list-group-item list-group-item-action text-center font-weight-bold">자유게시판</a>
     <a href="/board/list?boardCategory=2"
+       class="list-group-item list-group-item-action text-center font-weight-bold">가입인사</a>
+    <a href="/board/list?boardCategory=3"
        class="list-group-item list-group-item-action text-center font-weight-bold">정보게시판</a>
-    <a href="/board/list"
-       class="list-group-item list-group-item-action text-center font-weight-bold">정보게시판</a>
-    <a href="#"
+    <a href="/board/list?boardCategory=4"
        class="list-group-item list-group-item-action text-center font-weight-bold">정보게시판</a>
     <a href="#"
        class="list-group-item list-group-item-action text-center font-weight-bold">정보게시판</a>
