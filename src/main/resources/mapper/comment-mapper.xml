@@ -12,6 +12,24 @@
         insert into comment_table(commentWriter, commentContents, boardId)
         values(#{commentWriter}, #{commentContents}, #{boardId})
     </insert>
+
+
+    <update id="update" parameterType="comment">
+        UPDATE comment_table
+        SET commentContents = #{commentContents}
+        WHERE id = #{id}
+    </update>
+
+
+    <delete id="delete" parameterType="Long">
+        DELETE FROM comment_table
+        WHERE id = #{id}
+    </delete>
+
+    <select id="findById" parameterType="Long" resultType="Comment">
+        select * from comment_table where memberId=#{memberId}
+    </select>
+
 </mapper>
 
 

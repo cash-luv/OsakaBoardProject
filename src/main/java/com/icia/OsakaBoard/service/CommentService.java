@@ -18,4 +18,16 @@ public class CommentService {
     public void save(CommentDTO commentDTO) {
         commentRepository.save(commentDTO);
     }
+
+    public void update(CommentDTO commentDTO) {
+        commentRepository.update(commentDTO);
+    }
+
+    public void delete(Long commentId) {
+        commentRepository.delete(commentId);
+    }
+
+    public CommentDTO findById(Long id) {
+       return commentRepository.findById(id);
+    }
 }

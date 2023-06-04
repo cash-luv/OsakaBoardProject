@@ -115,6 +115,18 @@
                                             <fmt:formatDate value="${comment.commentCreatedTime}"
                                                             pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
                                         </td>
+                                        <td>
+                                            <c:if test="${editable}">
+                                                <button class="btn btn-primary" onclick="comment_update()">수정</button>
+                                            </c:if>
+                                        </td>
+
+                                        <!-- Display delete button if the logged-in user is the owner of the comment -->
+                                        <td>
+                                            <c:if test="${editable}">
+                                                <button class="btn btn-danger" onclick="comment_delete()">삭제</button>
+                                            </c:if>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -167,6 +179,56 @@
             }
         });
     }
+
+    const comment_update = () => {
+        const result = document.getElementById("comment-list");
+        const boardId = '${board.id}';
+        const memberId = '${comment.memberId}'
+        const commentContents = document.getElementById("comment-contents").value;
+        $.ajax({
+            type: "post",
+            url: "/comment/update",
+            data: {
+                "memberId": memberId,
+                "commentContents": commentContents,
+                "boardId": boardId
+            },
+            success: function (res) {
+                console.log(res);
+                let output = "<table class='table table-bordered'>";
+                // Generate the updated comment list HTML using the response data
+                output += "</table>";
+                result.innerHTML = output;
+            },
+            error: function () {
+                console.log("Update failed");
+            }
+        });
+    };
+
+    const comment_delete = () => {
+        const result = document.getElementById("comment-list");
+        $.ajax({
+            type: "post",
+            url: "/comment/delete",
+            data: {
+                "commentId": commentId,
+                "boardId": boardId
+            },
+            success: function (res) {
+                console.log(res);
+                let output = "<table class='table table-bordered'>";
+                // Generate the updated comment list HTML using the response data
+                output += "</table>";
+                result.innerHTML = output;
+            },
+            error: function () {
+                console.log("Delete failed");
+            }
+        });
+    };
+
+
     const board_list = () => {
         location.href = "/board/list?id=${board.id}&boardCategory=${boardCategory}&page=${paging.page}&q=${q}";
     }
@@ -192,7 +254,7 @@
                 "boardId": boardId,
                 "memberId": memberId
             },
-            success: function (){
+            success: function () {
                 let output = "<button id='Like-button' class='btn btn-primary' onclick='UnLike()'>좋아요취소</button>";
                 result.innerHTML = output;
                 eaResult.innerHTML = eaValue + 1;
@@ -217,7 +279,7 @@
                 "boardId": boardId,
                 "memberId": memberId
             },
-            success: function (){
+            success: function () {
                 let output = "<button id='unLike-button' class='btn btn-primary' onclick='Like()'>좋아요</button>";
                 result.innerHTML = output;
                 eaResult.innerHTML = eaValue - 1;
@@ -260,7 +322,7 @@
                     "board_no": boardNo,
                     "user_no": userNo
                 }),
-                success: function(data) {
+                success: function (data) {
                     console.log("Like removed");
                 }
             });
@@ -277,7 +339,7 @@
                     "board_no": boardNo,
                     "user_no": userNo
                 }),
-                success: function(data) {
+                success: function (data) {
                     console.log("Like added");
                 }
             });

@@ -88,7 +88,6 @@ public class BoardController {
                          @RequestParam(value = "type", required = false, defaultValue = "boardTitle") String type,
                          HttpSession session) {
         boardService.updateHits(id);
-        MemberDTO memberDTO = new MemberDTO();
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("board", boardDTO);
         model.addAttribute("boardCategory", boardCategory);
@@ -103,6 +102,8 @@ public class BoardController {
             model.addAttribute("boardFileList", boardFileDTO);
         }
         List<CommentDTO> commentDTOList = commentService.findAll(id);
+        CommentDTO commentDTO = new CommentDTO();
+        model.addAttribute("comment",commentDTO);
         if (commentDTOList.size() == 0) {
             model.addAttribute("commentList", null);
         } else {

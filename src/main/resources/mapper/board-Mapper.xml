@@ -106,12 +106,12 @@
         delete from Likes_table where boardId = #{boardId} and memberId=#{memberId}
     </delete>
 
-    <select id="findPopularPosts" resultType="BoardDTO">
-        SELECT *
-        FROM Board_table
-        WHERE board_like > #{minLikes}
-        ORDER BY board_like DESC
-    </select>
+<!--    <select id="findPopularPosts" resultType="BoardDTO">-->
+<!--        SELECT *-->
+<!--        FROM Board_table-->
+<!--        WHERE board_like > #{minLikes}-->
+<!--        ORDER BY board_like DESC-->
+<!--    </select>-->
 
 
 

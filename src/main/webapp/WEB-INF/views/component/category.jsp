@@ -18,7 +18,7 @@
     <div class="list-group mt-4 my-3 mb-3">
         <a href="/board/bestPost"
            class="list-group-item list-group-item-action text-center font-weight-bold">인기글</a>
-        <a href="/board/"
+        <a href="/board/list"
            class="list-group-item list-group-item-action text-center font-weight-bold">전체글보기</a>
         <a href="/board/list?boardCategory=1"
            class="list-group-item list-group-item-action text-center font-weight-bold">자유게시판</a>

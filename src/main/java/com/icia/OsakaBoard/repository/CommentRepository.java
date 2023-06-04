@@ -18,4 +18,16 @@ public class CommentRepository {
     public void save(CommentDTO commentDTO) {
         sql.insert("Comment.save",commentDTO);
     }
+
+    public void update(CommentDTO commentDTO) {
+        sql.update("Comment.update",commentDTO);
+    }
+
+    public void delete(Long commentId) {
+        sql.delete("Comment.delete",commentId);
+    }
+
+    public CommentDTO findById(Long id) {
+        return sql.selectOne("Comment.findById",id);
+    }
 }
