@@ -19,6 +19,7 @@ public class BoardDTO {
     private Long member_id;
     private Long boardCategory;
     private List<MultipartFile> boardFile;
+    private int board_like;
 
 
 }

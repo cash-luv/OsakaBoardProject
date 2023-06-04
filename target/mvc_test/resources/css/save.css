@@ -34,3 +34,7 @@
 .bir_mm+.bir_dd, .bir_yy.bir_mm{
     padding-left: 10px;
 }
+.btn-primary.active {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}

@@ -75,6 +75,46 @@
         update Board_table set boardHits=boardHits+1 where id=#{id}
     </update>
 
+    <update id="update" parameterType="board">
+        update Board_table set boardCategory=#{boardCategory},boardTitle=#{boardTitle}, boardContents=#{boardContents}
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        delete from Board_table where id=#{id}
+    </delete>
+
+    <!-- 좋아요 눌럿는지 안눌럿는지 -->
+    <select id="findLike" parameterType="Like" resultType="Like">
+        select * from Likes_table where  memberId = #{memberId} and boardId = #{boardId}
+    </select>
+
+    <update id="likeUp" parameterType="Long">
+        update Board_table set board_like = board_like + 1 where id = #{id}
+    </update>
+
+    <update id="likeDown" parameterType="Long">
+        update Board_table set board_like = board_like - 1 where id = #{id}
+    </update>
+
+    <insert id="like" parameterType="Like">
+        insert into Likes_table(boardId, memberId)
+        values (#{boardId}, #{memberId})
+    </insert>
+
+    <delete id="unLike" parameterType="Like">
+        delete from Likes_table where boardId = #{boardId} and memberId=#{memberId}
+    </delete>
+
+    <select id="findPopularPosts" resultType="BoardDTO">
+        SELECT *
+        FROM Board_table
+        WHERE board_like > #{minLikes}
+        ORDER BY board_like DESC
+    </select>
+
+
+
 
 </mapper>
 

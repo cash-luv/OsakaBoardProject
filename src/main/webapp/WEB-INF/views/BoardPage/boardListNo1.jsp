@@ -33,6 +33,9 @@
                         <h3>자유게시판</h3>
                     </c:when>
                     <c:when test="${boardCategory == 2}">
+                        <h3>가입인사</h3>
+                    </c:when>
+                    <c:when test="${boardCategory == 3}">
                         <h3>정보게시판</h3>
                     </c:when>
                     <c:otherwise>
@@ -61,16 +64,18 @@
                             <th>작성자</th>
                             <th>작성일</th>
                             <th>조회수</th>
+                            <th>좋아요</th>
                             <th>파일</th>
                         </tr>
                         <c:forEach items="${boardList}" var="board">
-                            <tr onclick="window.location='/board/detail?id=${board.id}'" style="cursor: pointer;">
+                            <tr onclick="window.location='/board/detail?id=${board.id}&boardCategory=${boardCategory}&page=${paging.page}&q=${q}'" style="cursor: pointer;">
                                 <td>${board.id}</td>
                                 <td>${board.boardTitle}</td>
                                 <td>${board.boardWriter}</td>
 <%--                                <!-- <td>${board.boardContents}</td> -->--%>
                                 <td>${board.boardCreatedTime}</td>
                                 <td>${board.boardHits}</td>
+                                <td>${board.board_like}</td>
                                 <td>${board.fileAttached}</td>
                             </tr>
                         </c:forEach>

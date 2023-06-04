@@ -2,6 +2,7 @@ package com.icia.OsakaBoard.service;
 
 import com.icia.OsakaBoard.dto.BoardDTO;
 import com.icia.OsakaBoard.dto.BoardFileDTO;
+import com.icia.OsakaBoard.dto.LikeDTO;
 import com.icia.OsakaBoard.dto.PageDTO;
 import com.icia.OsakaBoard.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -193,5 +194,38 @@ public class BoardService {
     public void updateHits(Long id) {
         boardRepository.updateHits(id);
     }
+
+    public void update(BoardDTO boardDTO) {
+        boardRepository.update(boardDTO);
+    }
+
+    public void delete(Long id) {
+        boardRepository.delete(id);
+    }
+
+    public void likeUp(Long boardId) {
+        boardRepository.likeUp( boardId);
+    }
+
+    public void likeDown(Long boardId) {
+        boardRepository.likeDown(boardId);
+    }
+
+    public LikeDTO findLike(LikeDTO likeDTO) {
+        return boardRepository.findLike(likeDTO);
+    }
+
+    public void like(LikeDTO likeDTO) {
+        boardRepository.like(likeDTO);
+    }
+
+    public void unLike(LikeDTO likeDTO) {
+        boardRepository.unLike(likeDTO);
+    }
+
+//    public List<boardDTO> findbestPost(int i) {
+//
+//    }
 }
+
 

@@ -20,8 +20,9 @@
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="/resources/css/save.css">
     <link rel="stylesheet" href="/resources/css/rpg.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
 </head>
 
 <link>
@@ -50,11 +51,13 @@
                     <tr>
                         <td>조회수</td>
                         <td>${board.boardHits}</td>
-                        <td></td>
-                        <td></td>
+                        <td>좋아요</td>
+                        <td id="like-ea">${board.board_like}</td>
                     </tr>
                     <tr>
-                        <h5><td colspan="4"  id="board-contents">${board.boardContents}</td></h5>
+                        <h5>
+                            <td colspan="4" id="board-contents">${board.boardContents}</td>
+                        </h5>
                     </tr>
                     <c:if test="${board.fileAttached == 1}">
                         <tr>
@@ -67,15 +70,27 @@
                     </c:if>
                 </table>
                 <button class="btn btn-primary" onclick="board_list()">목록</button>
+                <div id="like-container">
+                    <c:choose>
+                        <c:when test="${board_like == 1}">
+                            <button id="Like-button" class="btn btn-primary" onclick="UnLike()">좋아요취소</button>
+                        </c:when>
+                        <c:otherwise>
+                            <button id="unLike-button" class="btn btn-primary" onclick="Like()">좋아요</button>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
                 <c:if test="${editable}">
                     <button class="btn btn-primary" onclick="board_update()">수정</button>
                     <button class="btn btn-danger" onclick="board_delete()">삭제</button>
                 </c:if>
 
+
                 <div id="comment-write-area" class="mt-3">
-                    <input type="text" id="comment-writer" value="${sessionScope.loginId}" readonly
+                    <input type="text" id="comment-writer" name="commentWriter" value="${sessionScope.loginId}" readonly
                            class="form-control">
-                    <input type="text" id="comment-contents" placeholder="댓글 내용" class="form-control">
+                    <input type="text" id="comment-contents" name="commentContents" placeholder="댓글 내용"
+                           class="form-control">
                     <button class="btn btn-success" onclick="comment_write()">댓글작성</button>
                 </div>
                 <div id="comment-list" class="mt-3">
@@ -128,7 +143,7 @@
             },
             success: function (res) {
                 console.log(res);
-                let output = "<table>";
+                let output = "<table class='table table-bordered'>";
                 output += "<tr>";
                 output += "<th>id</th>";
                 output += "<th>작성자</th>";
@@ -153,19 +168,122 @@
         });
     }
     const board_list = () => {
-        const type = '${type}';
-        const q = '${q}';
-        const page = '${page}'
-        location.href = "/board/list?page=" + page + "&type" + type + "&q=" + q;
+        location.href = "/board/list?id=${board.id}&boardCategory=${boardCategory}&page=${paging.page}&q=${q}";
     }
     const board_update = () => {
-        const id = '${board.id}';
-        location.href = "/board/update?id=" + id;
+        location.href = "/board/update?id=${board.id}&boardCategory=${boardCategory}&page=${paging.page}&q=${q}";
     }
     const board_delete = () => {
         const id = '${board.id}';
         location.href = "/board/delete?id=" + id;
     }
+
+    const Like = () => {
+        const boardId = '${board.id}';
+        const memberId = '${sessionScope.id}';
+        const result = document.getElementById("like-container");
+        const eaResult = document.getElementById("like-ea");
+        const eaValue = parseInt(eaResult.innerHTML);
+
+        $.ajax({
+            type: "post",
+            url: "/board/likeUp",
+            data: {
+                "boardId": boardId,
+                "memberId": memberId
+            },
+            success: function (){
+                let output = "<button id='Like-button' class='btn btn-primary' onclick='UnLike()'>좋아요취소</button>";
+                result.innerHTML = output;
+                eaResult.innerHTML = eaValue + 1;
+            },
+            error: function () {
+                console.log("실패");
+            }
+        })
+    }
+
+    const UnLike = () => {
+        const boardId = '${board.id}';
+        const memberId = '${sessionScope.id}';
+        const result = document.getElementById("like-container");
+        const eaResult = document.getElementById("like-ea");
+        const eaValue = parseInt(eaResult.innerHTML);
+
+        $.ajax({
+            type: "post",
+            url: "/board/likeDown",
+            data: {
+                "boardId": boardId,
+                "memberId": memberId
+            },
+            success: function (){
+                let output = "<button id='unLike-button' class='btn btn-primary' onclick='Like()'>좋아요</button>";
+                result.innerHTML = output;
+                eaResult.innerHTML = eaValue - 1;
+            },
+            error: function () {
+                console.log("실패");
+            }
+        })
+    }
+    /*const toggleLike = () => {
+        const likeButton = document.getElementById("like-button");
+
+        if (likeButton.classList.contains("active")) {
+            // Remove like
+            likeButton.classList.remove("active");
+            likeButton.innerText = "좋아요";
+        } else {
+            // Add like
+            likeButton.classList.add("active");
+            likeButton.innerText = "좋아요 취소";
+        }
+    }*/
+    const likeVal = '${board.board_like}';
+    const boardNo = '${board.id}';
+    const userNo = '${sessionScope.loginId}';
+
+    const toggleLike = () => {
+        const likeButton = document.getElementById("like-button");
+
+        if (likeButton.classList.contains("active")) {
+            // Remove like
+            likeButton.classList.remove("active");
+            likeButton.innerText = "좋아요";
+            // AJAX call to decrease like count
+            $.ajax({
+                type: 'post',
+                url: "/board/likeUp",
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "board_no": boardNo,
+                    "user_no": userNo
+                }),
+                success: function(data) {
+                    console.log("Like removed");
+                }
+            });
+        } else {
+            // Add like
+            likeButton.classList.add("active");
+            likeButton.innerText = "좋아요 취소";
+            // AJAX call to increase like count
+            $.ajax({
+                type: 'post',
+                url: "/board/likeDown",
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "board_no": boardNo,
+                    "user_no": userNo
+                }),
+                success: function(data) {
+                    console.log("Like added");
+                }
+            });
+        }
+    };
+
 </script>
 
 </body>

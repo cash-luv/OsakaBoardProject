@@ -61,16 +61,6 @@
 
 
 <script>
-    <%--const loginArea = document.getElementById("login-area");--%>
-    <%--const loginId = '${sessionScope.loginId}';--%>
-    <%--console.log(loginId.length);--%>
-
-    <%--if (loginId.length != 0) {--%>
-    <%--    loginArea.innerHTML = "<a class='nav-link' href='/member/mypage' style='color: white;'>" + loginId + "님 환영해요!</a>" +--%>
-    <%--        "<a class='nav-link' href='/member/logout' style='display: inherit;'>로그아웃</a>";--%>
-    <%--} else {--%>
-    <%--    loginArea.innerHTML = "<a class='nav-link' href='/member/login'></a>";--%>
-    <%--}--%>
 
     const loginArea = document.getElementById("login-area");
     const loginId = '${sessionScope.loginId}';

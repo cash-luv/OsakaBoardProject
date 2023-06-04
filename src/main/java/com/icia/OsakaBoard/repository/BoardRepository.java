@@ -2,6 +2,7 @@ package com.icia.OsakaBoard.repository;
 
 import com.icia.OsakaBoard.dto.BoardDTO;
 import com.icia.OsakaBoard.dto.BoardFileDTO;
+import com.icia.OsakaBoard.dto.LikeDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -70,4 +71,34 @@ public class BoardRepository {
     public void updateHits(Long id) {
         sql.update("Board.updateHits",id);
     }
+
+    public void update(BoardDTO boardDTO) {
+        System.out.println("boardDTO" + boardDTO);
+        sql.update("Board.update", boardDTO);
+    }
+
+    public void delete(Long id) {
+        sql.delete("Board.delete", id);
+    }
+
+    public void likeUp(Long id) {
+        sql.update("Board.likeUp",  id);
+    }
+
+    public void likeDown(Long id) {
+        sql.delete("Board.likeDown",  id);
+    }
+
+    public LikeDTO findLike(LikeDTO likeDTO) {
+        return sql.selectOne("findLike",likeDTO);
+    }
+
+    public void like(LikeDTO likeDTO) {
+        sql.insert("Board.like", likeDTO);
+    }
+
+    public void unLike(LikeDTO likeDTO) {
+        sql.delete("Board.unLike", likeDTO);
+    }
+
 }
