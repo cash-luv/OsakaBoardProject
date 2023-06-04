@@ -8,5 +8,6 @@
         <typeAlias type="com.icia.OsakaBoard.dto.BoardDTO" alias="Board"></typeAlias>
         <typeAlias type="com.icia.OsakaBoard.dto.BoardFileDTO" alias="boardFile"></typeAlias>
         <typeAlias type="com.icia.OsakaBoard.dto.CommentDTO" alias="Comment"></typeAlias>
+        <typeAlias type="com.icia.OsakaBoard.dto.LikeDTO" alias="Like"></typeAlias>
     </typeAliases>
 </configuration>
